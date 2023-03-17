@@ -1,9 +1,9 @@
 import React from 'react'
 import { useField } from '../hooks/index'
 import { useDispatch } from 'react-redux'
-import { logUserIn } from '../reducers/loginReducer'
-// import { TextField, Button } from '@mui/material'
+import { userLogin } from '../reducers/loginReducer'
 
+// import { TextField, Button } from '@mui/material'
 import Notification from './Notification'
 
 const LoginForm = () => {
@@ -18,7 +18,7 @@ const LoginForm = () => {
       username: username.value,
       password: password.value,
     }
-    dispatch(logUserIn(credentials))
+    dispatch(userLogin(credentials))
     resetUsername()
     resetPassword()
   }
@@ -27,7 +27,7 @@ const LoginForm = () => {
     <div>
       <h2 className='header-title'>Blogs App</h2>
       <Notification />
-      <h2>Log in to application</h2>
+      <h2>Log In</h2>
       <form onSubmit={handleLogin}>
         <div>
           <input label='username' {...username} />
@@ -35,7 +35,7 @@ const LoginForm = () => {
         <div>
           <input label='password' {...password} />
         </div>
-        <button variant='contained' color='primary' type='submit'>
+        <button variant='contained' type='submit'>
           login
         </button>
       </form>

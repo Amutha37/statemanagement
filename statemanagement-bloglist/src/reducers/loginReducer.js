@@ -19,7 +19,7 @@ const loginSlice = createSlice({
 
 export const { login, logout } = loginSlice.actions
 
-export const logUserIn = (credentials) => {
+export const userLogin = (credentials) => {
   return async (dispatch) => {
     const { username, password } = credentials
     try {

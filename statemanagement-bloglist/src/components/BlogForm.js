@@ -1,43 +1,58 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { createNewBlog } from '../reducers/blogReducer'
+import { useField } from '../hooks/index'
 
-const BlogForm = ({ createBlog }) => {
+const BlogForm = ({ blogFormRef }) => {
+  const { reset: resetTitle, ...title } = useField('text')
+  const { reset: resetAuthor, ...author } = useField('text')
+  const { reset: resetUrl, ...url } = useField('text')
   // == new blog list local state ===
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  // const [title, setTitle] = useState('')
+  // const [author, setAuthor] = useState('')
+  // const [url, setUrl] = useState('')
 
+  const dispatch = useDispatch()
   // === handle change ===
-  const handleChangeTitle = (event) => {
-    setTitle(event.target.value)
-  }
-  const handleChangeAuthor = (event) => {
-    setAuthor(event.target.value)
-  }
-  const handleChangeUrl = (event) => {
-    setUrl(event.target.value)
-  }
+  // const handleChangeTitle = (event) => {
+  //   setTitle(event.target.value)
+  // }
+  // const handleChangeAuthor = (event) => {
+  //   setAuthor(event.target.value)
+  // }
+  // const handleChangeUrl = (event) => {
+  //   setUrl(event.target.value)
+  // }
 
   // === add blog ===
 
   const addBlog = (e) => {
     e.preventDefault()
+    blogFormRef.current.toggleVisibility()
 
-    createBlog({
-      title,
-      author,
-      url,
-    })
-
-    setTitle('')
-    setUrl('')
-    setAuthor('')
+    dispatch(
+      createNewBlog({
+        title: title.value,
+        author: author.value,
+        url: url.value,
+      })
+    )
+    // createBlog({
+    //   title: title.value,
+    //   author: author.value,
+    //   url: url.value,
+    // })
+    // dispatch(create(newBlog))
+    resetTitle()
+    resetAuthor()
+    resetUrl()
   }
 
   return (
     <div className='newBlog'>
       <h2>Create a new blog list</h2>
       <form onSubmit={addBlog}>
-        <label>
+        {/* <label>
           Title
           <input
             type='text'
@@ -66,7 +81,16 @@ const BlogForm = ({ createBlog }) => {
             placeholder='web url'
             onChange={handleChangeUrl}
           />
-        </label>
+        </label> */}
+        <div>
+          <input label='title' {...title} />
+        </div>
+        <div>
+          <input label='author' {...author} />
+        </div>
+        <div>
+          <input label='url' {...url} />
+        </div>
         <button type='submit'>Save</button>
       </form>
     </div>

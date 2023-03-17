@@ -1,12 +1,11 @@
-import { setToken } from './users'
-
+import { getToken } from './users'
 import axios from 'axios'
 const baseUrl = '/api/blogs'
 
 // authorize token
 const config = {
   headers: {
-    Authorization: `bearer ${setToken()}`,
+    Authorization: `bearer ${getToken()}`,
   },
 }
 

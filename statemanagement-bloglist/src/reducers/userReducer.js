@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAllUser } from '../services/users'
+import { getAll } from '../services/users'
 
 const userSlice = createSlice({
   name: 'users',
@@ -15,7 +15,7 @@ const { setUsers } = userSlice.actions
 
 export const initializeUsers = () => {
   return async (dispatch) => {
-    const users = await getAllUser()
+    const users = await getAll()
     dispatch(setUsers(users))
   }
 }
