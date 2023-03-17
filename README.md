@@ -4,7 +4,7 @@
 
 # $\color{cyan}{Part7f}$
 
-## Getting Started with $\textcolor{orange}{Redux\ }$
+## Getting Started with $\textcolor{orange}{Redux-ReactQuery-Context\ }$
 
 <details>
 <summary>
