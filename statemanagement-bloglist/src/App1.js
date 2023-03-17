@@ -23,22 +23,8 @@ const App = () => {
   const blogFormRef = useRef()
   const user = useSelector((state) => state.login)
 
-  // const [user, setUser] = useState(null)
-
-  // const [errorMessage, setErrorMessage] = useState(null)
-  // const [errTextColour, setErrTextColour] = useState(true)
-  // const [blogs, setBlogs] = useState([])
-  // const [showing, setShowing] = useState(false)
-
   // Handle the first loading page with user loged in
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-  //   if (loggedUserJSON) {
-  //     const user = JSON.parse(loggedUserJSON)
-  //     setUser(user)
-  //     setToken(user.token)
-  //   }
-  // }, [])
+
   useEffect(() => {
     const userFromStorage = getUser()
     if (userFromStorage) {
@@ -51,77 +37,9 @@ const App = () => {
 
     dispatch(initializeBlogs())
     // === sorting data ===
-
-    // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
-
-    // dispatch(initializeBlogs())
   }, [dispatch])
 
-  console.log('im here')
   // === Add new blog list ===
-  // const addBlog = async (blogObject) => {
-  //   // const newBlog = { title, author, url }
-
-  //   // create(blogObject).then((returnedBlog) => {
-  //   //   setBlogs(blogs.concat(returnedBlog))
-  //   // })
-  //   blogFormRef.current.toggleVisibility()
-  //   setErrTextColour(false)
-  //   try {
-  //     const saveBlog = await create(blogObject)
-  //     console.log('saveBlog', saveBlog)
-
-  //     setBlogs([...blogs, saveBlog])
-  //     setShowing(true)
-  //     setErrorMessage(`Blog '${saveBlog.title}' succesfully saved.`)
-  //     setTimeout(() => {
-  //       setErrorMessage(null)
-  //     }, 5000)
-  //   } catch (error) {
-  //     console.log(error.response.data)
-  //     setErrTextColour(true)
-  //     setShowing(true)
-  //     setErrorMessage(error.response.data)
-  //     setTimeout(() => {
-  //       setErrorMessage(null)
-  //     }, 5000)
-  //   }
-  // }
-
-  // === handling loging ===
-  // const handleLogin = async (loginObject) => {
-  //   try {
-  //     const user = await loginService.login({
-  //       username: loginObject.username,
-  //       password: loginObject.password,
-  //     })
-  //     window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-  //     // setToken(user.token)
-  //     setUser(user)
-  //   } catch (exception) {
-  //     // setErrTextColour(true)
-  //     setShowing(true)
-  //     setErrorMessage('Wrong user name or password!')
-  //     setTimeout(() => {
-  //       setErrorMessage(null)
-  //     }, 5000)
-  //   }
-  // }
-
-  // === login form ===
-
-  // const loginForm = () => (
-  //   <Togglable buttonLabel='Log In'>
-  //     <LoginForm createLogin={handleLogin} />
-  //   </Togglable>
-  // )
-
-  // === New Blog list form ===
-  // const blogForm = () => (
-  //   <Togglable buttonLabel='Create new blog list' ref={blogFormRef}>
-  //     <BlogForm createBlog={addBlog} signOff={signOff} />
-  //   </Togglable>
-  // )
 
   //  === signoff ===
   const signOff = () => {
@@ -168,7 +86,6 @@ const App = () => {
           <LoginForm />
         </Togglable>
       ) : (
-        // loginForm()
         <>
           <div className='logInBy'>
             <p>{user.name} logged-in</p>
@@ -180,21 +97,8 @@ const App = () => {
           <Togglable buttonLabel='Create ' ref={blogFormRef}>
             <BlogForm blogFormRef={blogFormRef} signOff={signOff} />
           </Togglable>
-          {/* {blogForm()} */}
-
           <h2>List of blogs</h2>
-
           <BlogList />
-          {/* {blogs.map((blog, i) => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              ind={i}
-              handleBlogLikes={handleBlogLikes}
-              handleDeleteBlog={handleDeleteBlog}
-              logedUser={user.name}
-            />
-          ))} */}
         </>
       )}
     </div>
