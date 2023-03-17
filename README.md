@@ -2,7 +2,7 @@
 <h1 align="center"> $\textcolor{orange}{Extending\ the\ bloglist\ }$
 </h1>
 
-# $\color{cyan}{Part7f}$
+# $\color{cyan}{Part7f/}$
 
 ## Getting Started with $\textcolor{orange}{Redux\ }$
 
@@ -13,7 +13,7 @@
 
  </summary>
 
-- `tatemanagement-bloglist` Front end part for statemanagement
+- `statemanagement-bloglist` Front end part for statemanagement
 
 </details>
 
