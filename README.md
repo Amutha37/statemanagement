@@ -20,7 +20,7 @@
 <details>
 <summary>
 
-### $\color{cyan}{blog_list/_server/}$
+### $\color{cyan}{blog_/list/_server/}$
 
  </summary>
 
