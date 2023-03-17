@@ -9,21 +9,21 @@
 <details>
 <summary>
 
-### $\color{cyan}{statemanagement-bloglist}$
+### $\color{cyan}{Frontend}$
 
  </summary>
 
-- Front end part for statemanagement
+- `tatemanagement-bloglist` Front end part for statemanagement
 
 </details>
 
 <details>
 <summary>
 
-### $\color{cyan}{blog_/list/_server/}$
+### $\color{cyan}{Backend}$
 
  </summary>
 
-- Backend part of the server that links to MongoDb
+- `blog_list_server` Backend part of the server that links to MongoDb
 
 </details>
