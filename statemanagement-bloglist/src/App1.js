@@ -7,7 +7,7 @@ import { login } from './reducers/loginReducer'
 import Notification from './components/Notification'
 import Blog from './components/Blog.js'
 
-import { getAll, create, update, deleteBlog, setToken } from './services/blogs'
+import { getAll, create, update, deleteBlog } from './services/blogs'
 import loginService from './services/login'
 import { setUser, getUser } from './services/users'
 // import userService from './services/users'
@@ -42,12 +42,15 @@ const App = () => {
   //     setToken(user.token)
   //   }
   // }, [])
-  useEffect(() => {
-    const userFromStorage = getUser()
-    if (userFromStorage) {
-      dispatch(login(userFromStorage))
-    }
-  }, [])
+  useEffect(
+    (dispatch) => {
+      const userFromStorage = getUser()
+      if (userFromStorage) {
+        dispatch(login(userFromStorage))
+      }
+    },
+    [dispatch]
+  )
 
   useEffect(() => {
     dispatch(initializeUsers())
@@ -105,7 +108,7 @@ const App = () => {
         password: loginObject.password,
       })
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-      setToken(user.token)
+      // setToken(user.token)
       setUser(user)
     } catch (exception) {
       setErrTextColour(true)

@@ -23,7 +23,7 @@ export const clearUser = () => {
   token = null
 }
 
-export const getToken = () => token
+export const setToken = () => token
 
 export const getAllUser = async () => {
   const response = await axios.get(baseUrl)
