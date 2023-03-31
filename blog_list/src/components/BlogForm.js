@@ -23,11 +23,7 @@ const BlogForm = ({ togglableRef }) => {
       url: url.value,
       // likes: 0,
     }
-    dispatch(
-      createBlogInfo({
-        newBlogInfo,
-      })
-    )
+    dispatch(createBlogInfo(newBlogInfo))
     resetTitle()
     resetAuthor()
     resetUrl()
@@ -47,36 +43,15 @@ const BlogForm = ({ togglableRef }) => {
       <form onSubmit={handleSubmit}>
         <div>
           Content :
-          <input
-            // type={title.type}
-            // value={title.value}
-            // id='title'
-            // onChange={title.onChange}
-            label='title'
-            {...title}
-          />
+          <input label='title' {...title} />
         </div>
         <div>
           Author :
-          <input
-            // type={author.type}
-            // value={author.value}
-            // id='author'
-            // onChange={author.onChange}
-            label='author'
-            {...author}
-          />
+          <input label='author' {...author} />
         </div>
         <div>
           URL :
-          <input
-            // type={url.type}
-            // value={url.value}
-            // id='url'
-            // onChange={url.onChange}
-            label='url'
-            {...url}
-          />
+          <input label='url' {...url} />
         </div>
         <button>Create </button>
         <button onClick={handleReset}>Reset</button>
