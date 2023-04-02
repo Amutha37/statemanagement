@@ -1,5 +1,6 @@
 import { useField } from '../hooks'
 import { createBlogInfo } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 
 const BlogForm = ({ togglableRef }) => {
@@ -24,6 +25,7 @@ const BlogForm = ({ togglableRef }) => {
       // likes: 0,
     }
     dispatch(createBlogInfo(newBlogInfo))
+    dispatch(setNotification(`Added new blog list : ${newBlogInfo.title}`, 5))
     resetTitle()
     resetAuthor()
     resetUrl()

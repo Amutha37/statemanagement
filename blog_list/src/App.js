@@ -8,6 +8,7 @@ import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import LoggedInUser from './components/LoggedInUser'
+import Notification from './components/Notification'
 // import blogService from './services/blogs'
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <header>
         <h2>List of blogs</h2>
       </header>
+      <Notification />
       <div>
         {user === null ? (
           <Togglable buttonLabel='Log In'>
