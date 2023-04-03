@@ -32,6 +32,7 @@ function App() {
     return state.user
   })
 
+  console.log('userAppjs', user)
   // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
   // ? above
   // let sortLikes = (a, b) => b.likes - a.likes
@@ -55,12 +56,12 @@ function App() {
           <>
             <LoggedInUser user={user} />
             <Togglable buttonLabel='Create new blog list' ref={blogFormRef}>
-              <BlogForm togglableRef={blogFormRef} />
+              <BlogForm user={user} togglableRef={blogFormRef} />
             </Togglable>
+            <BlogList user={user} />
           </>
         )}
       </div>
-      <BlogList />
     </div>
   )
 }

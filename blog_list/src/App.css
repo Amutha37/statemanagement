@@ -104,9 +104,11 @@ ul {
 h2 {
   margin: 7rem auto 3rem auto;
 }
-.delBlog {
-  color: red;
+.del_btn {
+  background-color: red;
+  color: white;
   font-weight: bold;
+  margin-left: 1rem;
 }
 .count {
   color: green;
@@ -116,4 +118,9 @@ h2 {
 }
 #userRender {
   margin-bottom: 1rem;
+}
+#like_btn {
+  font-weight: 700;
+  background-color: green;
+  color: white;
 }

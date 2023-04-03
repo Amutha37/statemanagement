@@ -14,13 +14,10 @@ const blogSlice = createSlice({
       const { id } = blogToUdate
 
       return state.map((blo) => (blo.id !== id ? blo : blogToUdate))
-      // const blogToChange = state.find((n) => n.id === id)
-      // const changedBlog = {
-      //   ...blogToChange,
-      //   likes: ++blogToChange.likes,
-      // }
-
-      // return state.map((blog) => (blog.id !== id ? blog : changedBlog))
+    },
+    blogDelete(state, action) {
+      const id = action.payload
+      return state.filter((blog) => blog.id !== id)
     },
     setBlogs(state, action) {
       return action.payload
@@ -28,7 +25,7 @@ const blogSlice = createSlice({
   },
 })
 
-export const { appendBlog, setBlogs, addLikes } = blogSlice.actions
+export const { appendBlog, setBlogs, addLikes, blogDelete } = blogSlice.actions
 
 export const initializeBlogs = () => {
   return async (dispatch) => {
@@ -38,27 +35,42 @@ export const initializeBlogs = () => {
 }
 
 export const createBlogInfo = (content) => {
+  console.log(content)
   return async (dispatch) => {
-    const newBlogInfo = await blogService.create(content)
-    dispatch(appendBlog(newBlogInfo))
+    try {
+      const newBlogInfo = await blogService.create(content)
+      dispatch(appendBlog(newBlogInfo))
+    } catch (error) {
+      dispatch(setNotification(`Error  : '${error.message}'`, 5))
+      console.log(error)
+    }
   }
 }
 
-export const updateNewLikes = (id, blog) => {
-  console.log('blog', blog)
-  // const newLike = {
-  //   ...blog,
-  //   likes: blog.likes + 1,
-  //   user: blog.user.id,
-  // }
-  // const { id } = blog
+export const updateNewLikes = (blog) => {
+  const newLike = {
+    ...blog,
+    likes: blog.likes + 1,
+    user: blog.user.id,
+  }
 
   return async (dispatch) => {
-    dispatch(addLikes(blog))
     try {
-      await blogService.updateLikes(id, blog)
+      dispatch(addLikes(newLike))
+      await blogService.updateLikes(newLike)
     } catch (error) {
-      dispatch(setNotification(`You added likes for : '${error.message}'`, 5))
+      dispatch(setNotification(`Error  : '${error.message}'`, 5))
+    }
+  }
+}
+
+export const deleteCurrentBlog = (blog) => {
+  return async (dispatch) => {
+    try {
+      dispatch(blogDelete(blog.id))
+      await blogService.deleteBlog(blog.id)
+    } catch (error) {
+      dispatch(setNotification(`Deleting error : '${error.message}'`, 5))
       console.log(error)
     }
   }

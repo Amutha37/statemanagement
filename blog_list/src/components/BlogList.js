@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import Blog from './Blog'
 
-const BlogList = () => {
+const BlogList = ({ user }) => {
   // const [showDetails, setShowDetails] = useState(false)
 
   const blogs = useSelector((state) => state.blogs)
@@ -16,17 +16,10 @@ const BlogList = () => {
 
   // console.log('sortBlogs', blogs.sort(sortLikes))
 
-  console.log('blogss', blogs)
-  // s
-  // const handleBtn = () => setShowDetails(!showDetails)
-
-  // const showBlogInfo = { display: showDetails ? '' : 'none' }
-  // const buttonLabel = showDetails ? 'Hide' : 'More...'
-
   return (
     <>
       {blogs.map((blog, i) => (
-        <Blog key={blog.id} blog={blog} ind={i} />
+        <Blog key={blog.id} blog={blog} ind={i} user={user} />
         // <div key={ind} className='table_wraper blog'>
         //   <ul>
         //     <li>{ind + 1}.</li>

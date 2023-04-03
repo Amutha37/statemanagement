@@ -28,18 +28,26 @@ const create = async (newObject) => {
   return request.data
 }
 
-const updateLikes = async (id, newLike) => {
-  console.log('bloguser', id, newLike.user)
-  const response = await axios.put(`${baseUrl}/${id}`, newLike)
+const updateLikes = async (newLike) => {
+  // const id = newLike.id
+
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.put(`${baseUrl}/${newLike.id}`, newLike, config)
 
   return response.data
 }
 
-// export const deleteBlog = async (id) => {
-//   const request = await axios.delete(`${baseUrl}/${id}`, config)
-//   const response = request
-//   return response.data
-// }
+const deleteBlog = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const request = await axios.delete(`${baseUrl}/${id}`, config)
+  const response = request
+  return response.data
+}
 // Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax:
 // from this to ES6 {
 //   getAll: getAll,
@@ -53,7 +61,7 @@ const blogService = {
   create,
   updateLikes,
   //   update,
-  //   deleteBlog,
+  deleteBlog,
   setToken,
 }
 export default blogService

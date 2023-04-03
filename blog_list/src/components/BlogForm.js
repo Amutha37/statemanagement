@@ -3,7 +3,7 @@ import { createBlogInfo } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 
-const BlogForm = ({ togglableRef }) => {
+const BlogForm = ({ togglableRef, user }) => {
   // const title = useField('text')
   // const author = useField('text')
   // const url = useField('text')
@@ -22,6 +22,7 @@ const BlogForm = ({ togglableRef }) => {
       title: title.value,
       author: author.value,
       url: url.value,
+
       // likes: 0,
     }
     dispatch(createBlogInfo(newBlogInfo))
