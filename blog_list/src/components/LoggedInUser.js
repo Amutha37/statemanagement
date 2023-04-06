@@ -1,9 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logUserOut } from '../reducers/loginReducer'
 
-const LoggedInUser = ({ user }) => {
+const LoggedInUser = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => {
+    return state.user
+  })
 
   //  === signoff ===
   const signOff = () => {

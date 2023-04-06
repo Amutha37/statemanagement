@@ -22,8 +22,9 @@ const BlogForm = ({ togglableRef, user }) => {
       title: title.value,
       author: author.value,
       url: url.value,
-
-      // likes: 0,
+      user: {
+        name: { user },
+      },
     }
     dispatch(createBlogInfo(newBlogInfo))
     dispatch(setNotification(`Added new blog list : ${newBlogInfo.title}`, 5))

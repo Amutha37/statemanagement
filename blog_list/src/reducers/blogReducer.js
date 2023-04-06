@@ -10,10 +10,10 @@ const blogSlice = createSlice({
       state.push(action.payload)
     },
     addLikes(state, action) {
-      const blogToUdate = action.payload
-      const { id } = blogToUdate
+      const blogToUpdate = action.payload
+      const { id } = blogToUpdate
 
-      return state.map((blo) => (blo.id !== id ? blo : blogToUdate))
+      return state.map((blo) => (blo.id !== id ? blo : blogToUpdate))
     },
     blogDelete(state, action) {
       const id = action.payload
@@ -48,6 +48,10 @@ export const createBlogInfo = (content) => {
 }
 
 export const updateNewLikes = (blog) => {
+  const blogUser = {
+    ...blog,
+    likes: blog.likes + 1,
+  }
   const newLike = {
     ...blog,
     likes: blog.likes + 1,
@@ -55,8 +59,8 @@ export const updateNewLikes = (blog) => {
   }
 
   return async (dispatch) => {
+    dispatch(addLikes(blogUser))
     try {
-      dispatch(addLikes(newLike))
       await blogService.updateLikes(newLike)
     } catch (error) {
       dispatch(setNotification(`Error  : '${error.message}'`, 5))
@@ -64,11 +68,11 @@ export const updateNewLikes = (blog) => {
   }
 }
 
-export const deleteCurrentBlog = (blog) => {
+export const deleteCurrentBlog = (blogId) => {
   return async (dispatch) => {
     try {
-      dispatch(blogDelete(blog.id))
-      await blogService.deleteBlog(blog.id)
+      dispatch(blogDelete(blogId))
+      await blogService.deleteBlog(blogId)
     } catch (error) {
       dispatch(setNotification(`Deleting error : '${error.message}'`, 5))
       console.log(error)

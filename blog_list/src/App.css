@@ -52,7 +52,7 @@ input {
 /* blog input form */
 
 .blog_list_container {
-  padding: 3rem;
+  padding: 4rem;
   background-color: rgb(99, 230, 201);
   display: block;
   text-align: center;
@@ -81,7 +81,7 @@ input {
   border: 3px solid black;
   display: absolute;
   flex-direction: row;
-  height: 12rem;
+  height: 14rem;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -104,7 +104,7 @@ ul {
 h2 {
   margin: 7rem auto 3rem auto;
 }
-.del_btn {
+#del_btn {
   background-color: red;
   color: white;
   font-weight: bold;

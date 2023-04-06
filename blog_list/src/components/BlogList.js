@@ -1,54 +1,21 @@
-import { useSelector } from 'react-redux'
 import React from 'react'
 import Blog from './Blog'
+import { useSelector } from 'react-redux'
 
-const BlogList = ({ user }) => {
-  // const [showDetails, setShowDetails] = useState(false)
-
+const BlogList = () => {
   const blogs = useSelector((state) => state.blogs)
-  if (!blogs) {
-    let sortLikes = (a, b) => b.likes - a.likes
+  // const blogs = useSelector((state) => {
+  //     return state.blogs
+  //   })
+  //   const users = useSelector((state) => {
+  //     return state.users
+  //   })
 
-    blogs.sort(sortLikes)
-    // console.log('sortBlogs', blogs.sort(sortLikes))
-  }
-  // let sortLikes = (a, b) => b.likes - a.likes
+  console.log('blogList', blogs)
 
-  // console.log('sortBlogs', blogs.sort(sortLikes))
+  const byLikes = (b1, b2) => b2.likes - b1.likes
 
-  return (
-    <>
-      {blogs.map((blog, i) => (
-        <Blog key={blog.id} blog={blog} ind={i} user={user} />
-        // <div key={ind} className='table_wraper blog'>
-        //   <ul>
-        //     <li>{ind + 1}.</li>
-        //     <li className='title'>Title : {blog.title}</li>
-        //     <li className='author'>By : {blog.author}</li>
-
-        //     <div style={showBlogInfo} className='blogAll'>
-        //       <li>Url : {blog.url}</li>
-        //       <li id='likesCount'>Likes : {blog.likes}</li>
-        //       <li>user : {blog.user.name}</li>
-        //     </div>
-        //   </ul>
-        //   <div className='btn_blog togglableContent'>
-        //     <button
-        //       id='moreHideBtn'
-        //       style={
-        //         showDetails
-        //           ? { color: 'black', fontWeight: 'bold' }
-        //           : { color: 'blue', fontWeight: 'bold' }
-        //       }
-        //       type='button'
-        //       onClick={handleBtn}
-        //     >
-        //       {buttonLabel}
-        //     </button>
-        //   </div>
-        // </div>
-      ))}
-    </>
-  )
+  return blogs.sort(byLikes).map((blog) => <Blog key={blog.id} blog={blog} />)
 }
+
 export default BlogList

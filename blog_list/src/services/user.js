@@ -1,8 +1,8 @@
-// import axios from 'axios'
-// const baseUserUrl = '/api/users'
+import axios from 'axios'
 
 // let token = null
 import blogService from './blogs'
+const baseUserUrl = '/api/users'
 
 const setUser = async (user) => {
   window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
@@ -19,7 +19,6 @@ const getUser = async () => {
   if (loggedUserJSON) {
     const user = JSON.parse(loggedUserJSON)
     blogService.setToken(user.token)
-
     return user
   }
   return null
@@ -28,6 +27,13 @@ const getUser = async () => {
 const removeUser = async () => {
   localStorage.clear()
 }
+// get all users
+const getAllUsers = async () => {
+  const response = await axios.get(baseUserUrl)
+  // console.log(response.data)
+  return response.data
+}
+
 // console.log('user', user)
 
 // Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax:
@@ -42,5 +48,6 @@ const userService = {
   getUser,
   setUser,
   removeUser,
+  getAllUsers,
 }
 export default userService
