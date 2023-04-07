@@ -3,7 +3,7 @@ import userService from '../services/user'
 import loginService from '../services/login'
 
 const loginSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState: null,
   reducers: {
     setLogin(state, action) {

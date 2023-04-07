@@ -13,7 +13,7 @@ const allUsersSlice = createSlice({
 
 export const { setAllUsers } = allUsersSlice.actions
 
-export const allUsers = () => {
+export const initialUsers = () => {
   return async (dispatch) => {
     const users = await userService.getAllUsers()
     dispatch(setAllUsers(users))

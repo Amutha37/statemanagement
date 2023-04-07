@@ -1,52 +1,100 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateNewLikes, deleteCurrentBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
-import { useSelector } from 'react-redux'
 
-// import { Button } from 'react-bootstrap'
 // import PropTypes from 'prop-types'
 
 const Blog = ({ blog }) => {
-  const dispatch = useDispatch()
-
   const user = useSelector((state) => state.user)
-
-  const [blogUserName, setBlogUserName] = useState(
-    !blog.user.name ? user.name : blog.user.name
-  )
 
   const [showDetails, setShowDetails] = useState(false)
 
+  const dispatch = useDispatch()
+  if (!blog.user.name) return null
+  let blogUserName = blog.user.name
+
+  if (!blogUserName) {
+    blogUserName = user.name
+  }
+  // const [visible, setVisible] = useState(false)
+  // const showWhenVisible = { display: visible ? '' : 'none' }
+  // const buttonLabel = visible ? 'hide' : 'view'
+
+  // const toggleVisibility = () => {
+  //   setVisible(!visible)
+  // }
   const handleBtn = () => setShowDetails(!showDetails)
 
   const showBlogInfo = { display: showDetails ? '' : 'none' }
   const buttonLabel = showDetails ? 'Hide' : 'More...'
 
+  // let blogUserName = blog.user.name
+
+  // const logedUser = user.name
+
+  // if (!blogUserName) {
+  //   blogUserName = logedUser
+  // }
+
   const handleLike = () => {
     dispatch(updateNewLikes(blog))
+
     dispatch(
       setNotification(`Blog ${blog.title} successfully updated`, 'success', 5)
     )
   }
 
-  const handleDeleteBlog = () => {
-    dispatch(deleteCurrentBlog(blog.id))
-    dispatch(
-      setNotification(`Blog ${blog.title} successfully deleted`, 'success', 5)
+  const handleDelete = () => {
+    const sureToDelete = window.confirm(
+      `Confirm remove blog you're don't need!  :${blog.title}`
     )
+
+    if (sureToDelete) {
+      dispatch(deleteCurrentBlog(blog))
+      dispatch(setNotification(`You deleted : '${blog.title}'`, 5))
+    }
   }
 
   return (
-    <div className='table_wraper blog'>
-      <div>
-        <p>
-          {/* <Link to={`/blogs/${blog.id}`}> */}
-          {blog.title} - by {blog.author}
-          {/* </Link>{' '} */}
-        </p>
+    <>
+      <div className='table_wraper blog'>
+        <ul>
+          <li id='userRender'>
+            {+1}. user :{blogUserName}
+          </li>
+
+          {/* <li className='title'>user : {blog.user.name}</li> */}
+          <li className='title'>Title : {blog.title}</li>
+          <li className='author'>By : {blog.author}</li>
+
+          <div style={showBlogInfo} className='blogAll'>
+            <li>
+              Url : <a href={blog.url}>{blog.url}</a>
+            </li>
+            {/* <li>user : {!blogUserName ? logedUser : blog.user.name}</li> */}
+            <li id='likesCount'>
+              Likes : {blog.likes}{' '}
+              <button id='like_btn' value={blog.id} onClick={handleLike}>
+                Like
+              </button>
+              {/* button to delete */}
+              {blogUserName === user.name && (
+                <button
+                  id='del_btn'
+                  type='button'
+                  onClick={handleDelete}
+                  // value={blog.id}
+                >
+                  Delete
+                </button>
+              )}
+            </li>
+          </div>
+        </ul>
         <div className='btn_blog togglableContent'>
           <button
+            id='moreHideBtn'
             style={
               showDetails
                 ? {
@@ -56,29 +104,14 @@ const Blog = ({ blog }) => {
                   }
                 : { color: 'blue', fontWeight: 'bold' }
             }
+            type='button'
             onClick={handleBtn}
           >
             {buttonLabel}
           </button>
         </div>
       </div>
-
-      <div style={showBlogInfo} className='blogAll'>
-        <p>user : {blogUserName}</p>
-        <p>{blog.url}</p>
-        <p>
-          {blog.likes}{' '}
-          <button id='like_btn' onClick={handleLike}>
-            likes
-          </button>
-          {blogUserName === user.name && (
-            <button id='del_btn' onClick={handleDeleteBlog}>
-              remove
-            </button>
-          )}
-        </p>
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -48,10 +48,12 @@ export const createBlogInfo = (content) => {
 }
 
 export const updateNewLikes = (blog) => {
-  const blogUser = {
+  const blogLiked = {
     ...blog,
     likes: blog.likes + 1,
   }
+  const id = blogLiked.id
+  console.log('blogUser', blogLiked, id)
   const newLike = {
     ...blog,
     likes: blog.likes + 1,
@@ -59,9 +61,9 @@ export const updateNewLikes = (blog) => {
   }
 
   return async (dispatch) => {
-    dispatch(addLikes(blogUser))
+    dispatch(addLikes(blogLiked))
     try {
-      await blogService.updateLikes(newLike)
+      await blogService.updateLikes(id, newLike)
     } catch (error) {
       dispatch(setNotification(`Error  : '${error.message}'`, 5))
     }
@@ -71,8 +73,8 @@ export const updateNewLikes = (blog) => {
 export const deleteCurrentBlog = (blogId) => {
   return async (dispatch) => {
     try {
-      dispatch(blogDelete(blogId))
-      await blogService.deleteBlog(blogId)
+      dispatch(blogDelete(blogId.id))
+      await blogService.deleteBlog(blogId.id)
     } catch (error) {
       dispatch(setNotification(`Deleting error : '${error.message}'`, 5))
       console.log(error)

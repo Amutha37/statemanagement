@@ -27,16 +27,14 @@ const create = async (newObject) => {
   return request.data
 }
 
-const updateLikes = async (blog) => {
-  // const id = newLike.id
-
+const updateLikes = async (id, newLike) => {
   const config = {
     headers: { Authorization: token },
   }
 
-  const response = await axios.put(`${baseUrl}/${blog.id}`, blog, config)
+  const response = await axios.put(`${baseUrl}/${id}`, newLike, config)
 
-  console.log('blogservice', blog, response.data)
+  console.log('blogservice', 'response.data', response.data)
   // const response = await axios.get(`${baseUrl}/${newLike.id}`, newLike, config)
 
   return response.data
