@@ -52,8 +52,9 @@ export const updateNewLikes = (blog) => {
     ...blog,
     likes: blog.likes + 1,
   }
+
   const id = blogLiked.id
-  console.log('blogUser', blogLiked, id)
+  console.log('blogUser', blogLiked, 'id', id, 'bloguserid', blog.user.id)
   const newLike = {
     ...blog,
     likes: blog.likes + 1,

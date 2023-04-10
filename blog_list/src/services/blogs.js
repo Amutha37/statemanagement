@@ -18,12 +18,12 @@ const getAll = async () => {
 }
 
 const create = async (newObject) => {
-  const config = {
+  let config = {
     headers: { Authorization: token },
   }
 
   const request = await axios.post(baseUrl, newObject, config)
-
+  console.log('newlycreated', request.data)
   return request.data
 }
 

@@ -30,8 +30,7 @@ const removeUser = async () => {
 // get all users
 const getAllUsers = async () => {
   const response = await axios.get(baseUserUrl)
-  // console.log(response.data)
-  console.log('response', response.data)
+
   return response.data
 }
 

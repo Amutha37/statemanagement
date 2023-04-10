@@ -3,27 +3,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateNewLikes, deleteCurrentBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, seq }) => {
   const user = useSelector((state) => state.user)
 
   const [showDetails, setShowDetails] = useState(false)
 
   const dispatch = useDispatch()
-  if (!blog.user.name) return null
+  if (!blog) return null
+
+  // if (!blog.user.name) return null
   let blogUserName = blog.user.name
 
   if (!blogUserName) {
     blogUserName = user.name
   }
-  // const [visible, setVisible] = useState(false)
-  // const showWhenVisible = { display: visible ? '' : 'none' }
-  // const buttonLabel = visible ? 'hide' : 'view'
 
-  // const toggleVisibility = () => {
-  //   setVisible(!visible)
-  // }
   const handleBtn = () => setShowDetails(!showDetails)
 
   const showBlogInfo = { display: showDetails ? '' : 'none' }
@@ -61,7 +57,7 @@ const Blog = ({ blog }) => {
       <div className='table_wraper blog'>
         <ul>
           <li id='userRender'>
-            {+1}. user :{blogUserName}
+            {seq + 1}. user :{blogUserName}
           </li>
 
           {/* <li className='title'>user : {blog.user.name}</li> */}
@@ -115,8 +111,8 @@ const Blog = ({ blog }) => {
   )
 }
 
-// Blog.propTypes = {
-//   blog: PropTypes.object.isRequired,
-// }
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+}
 
 export default Blog
