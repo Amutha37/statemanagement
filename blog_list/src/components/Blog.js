@@ -12,6 +12,7 @@ const Blog = ({ blog, seq }) => {
 
   const dispatch = useDispatch()
   if (!blog) return null
+  if (!user) return null
 
   // if (!blog.user.name) return null
   let blogUserName = blog.user.name

@@ -12,6 +12,7 @@ const BlogList = () => {
   //     return state.users
   //   })
 
+  if (!blogs) return null
   console.log('blogList', blogs)
 
   // const sorting = (a, b) => (b.likes > a.likes ? 1 : -1)

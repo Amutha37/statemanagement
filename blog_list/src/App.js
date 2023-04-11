@@ -6,33 +6,46 @@ import { useDispatch, useSelector } from 'react-redux'
 import Togglable from './components/Togglable'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
+import UsersList from './components/UsersList'
 import LoginForm from './components/LoginForm'
 import LoggedInUser from './components/LoggedInUser'
 import Notification from './components/Notification'
+import { allUsers } from './reducers/usersReducer'
 
-import { initialUsers } from './reducers/usersReducer'
-// import { setNotification } from '../reducers/notificationReducer'
+import { useNavigate } from 'react-router-dom'
+//  import blogService from './services/blogs'
 
-const App = () => {
+function App() {
+  // const [blogs, setBlogs] = useState([])
+  // const [showDetails, setShowDetails] = useState(false)
+
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
-  // const users = useSelector((state) => state.users)
-  const blogs = useSelector((state) => state.blog)
 
-  // const margin = {
-  //   margin: 5
-  // }
-
-  // const blogFormRef = React.createRef()
   const blogFormRef = useRef()
 
   useEffect(() => {
-    dispatch(initialUser())
     dispatch(initializeBlogs())
-    dispatch(initialUsers())
+    dispatch(initialUser())
+    dispatch(allUsers())
+    // === sorting data ===
   }, [dispatch])
 
-  //
+  const user = useSelector((state) => state.user)
+
+  // from store
+
+  if (!user) return null
+
+  // console.log('userAppjs', user)
+  const logedUser = user
+
+  // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
+  // ? above
+  // let sortLikes = (a, b) => b.likes - a.likes
+
+  // blogs.sort(sortLikes)
+  // console.log('blogs', blogs, user)
+  // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
 
   return (
     <div className='main_container'>
@@ -41,21 +54,23 @@ const App = () => {
       </header>
       <Notification />
       <div>
-        {user === null ? (
+        {logedUser === null ? (
           <Togglable buttonLabel='Log In'>
             <LoginForm />
           </Togglable>
         ) : (
           <>
-            <LoggedInUser />
+            <LoggedInUser logedUser={logedUser} />
             <Togglable buttonLabel='Create new blog list' ref={blogFormRef}>
-              <BlogForm togglableRef={blogFormRef} />
+              <BlogForm logedUser={logedUser} togglableRef={blogFormRef} />
             </Togglable>
-            {!blogs ? <BlogList blogs={blogs} /> : null}
+            <BlogList logedUser={logedUser} />
+            <UsersList />
           </>
         )}
       </div>
     </div>
   )
 }
+
 export default App
