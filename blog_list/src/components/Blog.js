@@ -4,6 +4,7 @@ import { updateNewLikes, deleteCurrentBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const Blog = ({ blog, seq }) => {
   const user = useSelector((state) => state.user)
@@ -55,59 +56,110 @@ const Blog = ({ blog, seq }) => {
 
   return (
     <>
-      <div className='table_wraper blog'>
-        <ul>
-          <li id='userRender'>
-            {seq + 1}. user :{blogUserName}
-          </li>
-
-          {/* <li className='title'>user : {blog.user.name}</li> */}
-          <li className='title'>Title : {blog.title}</li>
-          <li className='author'>By : {blog.author}</li>
-
-          <div style={showBlogInfo} className='blogAll'>
-            <li>
-              Url : <a href={blog.url}>{blog.url}</a>
-            </li>
-            {/* <li>user : {!blogUserName ? logedUser : blog.user.name}</li> */}
-            <li id='likesCount'>
-              Likes : {blog.likes}{' '}
-              <button id='like_btn' value={blog.id} onClick={handleLike}>
-                Like
-              </button>
-              {/* button to delete */}
-              {blogUserName === user.name && (
-                <button
-                  id='del_btn'
-                  type='button'
-                  onClick={handleDelete}
-                  // value={blog.id}
-                >
-                  Delete
-                </button>
-              )}
-            </li>
-          </div>
-        </ul>
-        <div className='btn_blog togglableContent'>
-          <button
-            id='moreHideBtn'
-            style={
-              showDetails
-                ? {
-                    color: 'white',
-                    fontWeight: 'bold',
-                    backgroundColor: 'brown',
-                  }
-                : { color: 'blue', fontWeight: 'bold' }
-            }
-            type='button'
-            onClick={handleBtn}
+      {/* <div className='table_wraper blog'> */}
+      <tbody className='table_wraper blog' key={user.id}>
+        <tr>
+          <td
+          // style={{
+          //   width: '7px',
+          // }}
           >
-            {buttonLabel}
-          </button>
-        </div>
-      </div>
+            {' '}
+            {seq + 1}.{' '}
+          </td>
+
+          <td
+          // style={{
+          //   width: '20px',
+          // }}
+          >
+            {blogUserName}
+          </td>
+          <td
+            style={{
+              width: '350px',
+            }}
+          >
+            <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+          </td>
+          <td>{blog.author}</td>
+          <td>
+            <button
+              id='moreHideBtn'
+              style={
+                showDetails
+                  ? {
+                      color: 'white',
+                      fontWeight: 'bold',
+                      backgroundColor: 'brown',
+                    }
+                  : { color: 'blue', fontWeight: 'bold' }
+              }
+              type='button'
+              onClick={handleBtn}
+            >
+              {buttonLabel}
+            </button>
+          </td>
+
+          {/* show more  } */}
+          {/* <div > */}
+          {/* <tr> */}
+          <td style={showBlogInfo}>
+            <a
+              style={{
+                maxWidth: '180px',
+              }}
+              href={blog.url}
+            >
+              {blog.url}
+            </a>{' '}
+          </td>
+          <td style={showBlogInfo}>
+            {blog.likes}{' '}
+            <button id='like_btn' value={blog.id} onClick={handleLike}>
+              Like
+            </button>
+          </td>
+
+          {blogUserName === user.name && (
+            <td style={showBlogInfo}>
+              <button
+                id='del_btn'
+                type='button'
+                onClick={handleDelete}
+                // value={blog.id}
+              >
+                Delete
+              </button>
+            </td>
+          )}
+          {/* </tr> */}
+          {/* </div> */}
+          {/* <Link to={`/users/${ user.id }`}> */}
+          {/* style="float: right" */}
+        </tr>
+      </tbody>
+
+      {/* <div className='btn_blog togglableContent'>
+        <button
+          id='moreHideBtn'
+          style={
+            showDetails
+              ? {
+                  color: 'white',
+                  fontWeight: 'bold',
+                  backgroundColor: 'brown',
+                }
+              : { color: 'blue', fontWeight: 'bold' }
+          }
+          type='button'
+          onClick={handleBtn}
+        >
+          {buttonLabel}
+        </button>
+      </div> */}
+      {/* </div> */}
     </>
   )
 }

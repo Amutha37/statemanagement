@@ -4,7 +4,7 @@ import UserBlogs from './UserBlogs'
 
 import { useSelector } from 'react-redux'
 
-const UsersList = () => {
+const Users = () => {
   const users = useSelector((state) => state.users)
 
   console.log('users', users)
@@ -50,4 +50,4 @@ const UsersList = () => {
   )
 }
 
-export default UsersList
+export default Users

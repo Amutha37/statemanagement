@@ -1,24 +1,27 @@
 import './App.css'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initialUser } from './reducers/loginReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Togglable from './components/Togglable'
-
+import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
-
+import Users from './components/Users'
 import LoginForm from './components/LoginForm'
+import LoggedInUser from './components/LoggedInUser'
+import Notification from './components/Notification'
 
 import { allUsers } from './reducers/usersReducer'
+// import Home from './components/Home'
+// import { useNavigate } from 'react-router-dom'
 
-import { useNavigate } from 'react-router-dom'
+// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
-import Menu from './components/Menu'
 //  import blogService from './services/blogs'
 
 function App() {
   // const [blogs, setBlogs] = useState([])
-  const [signInOut, setSignInOut] = useState(false)
+  // const [showDetails, setShowDetails] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -32,19 +35,12 @@ function App() {
   }, [dispatch])
 
   const user = useSelector((state) => state.user)
-  const blogs = useSelector((state) => state.blogs)
 
-  // const match = useMatch('/blogs/:id')
-
-  // const blog = match
-  //   ? blogs.find((blog) => blog.id === Number(match.params.id))
-  //   : null
-
-  // const blog = match
-  //   ? blogs.find((blog) => blog.id === Number(match.params.id))
-  //   : null
   // from store
 
+  // if (!user) return null
+
+  // console.log('userAppjs', user)
   const logedUser = user
 
   // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
@@ -54,45 +50,34 @@ function App() {
   // blogs.sort(sortLikes)
   // console.log('blogs', blogs, user)
   // blogs.sort((a, b) => (b.likes > a.likes ? 1 : -1))
+  // const padding = {
+  //   padding: 5,
+  // }
 
+  console.log('HERE')
   return (
     <div className='main_container'>
       <header>
         <h2>List of blogs</h2>
       </header>
-
-      {logedUser === null && (
-        <Togglable buttonLabel='Log In'>
-          <LoginForm />
-        </Togglable>
-      )}
-
-      {logedUser && <Menu blogs={blogs} logedUser={logedUser} />}
-
+      <Notification />
       <div>
-        {logedUser && (
-          <Togglable buttonLabel='Create new blog list' ref={blogFormRef}>
-            <BlogForm logedUser={logedUser} togglableRef={blogFormRef} />
-          </Togglable>
-        )}
-        {/* {logedUser === null ? (
+        {user === null ? (
           <Togglable buttonLabel='Log In'>
             <LoginForm />
           </Togglable>
         ) : (
           <>
-            <LoggedInUser logedUser={logedUser} />
+            <LoggedInUser />
             <Togglable buttonLabel='Create new blog list' ref={blogFormRef}>
-              <BlogForm logedUser={logedUser} togglableRef={blogFormRef} />
+              <BlogForm togglableRef={blogFormRef} />
             </Togglable>
+            <BlogList logedUser={logedUser} />
+            <Users />
           </>
-        )} */}
-      </div>
-      <div>
-        <i>Blogs app, Department of Computer Science 2023</i>
+        )}
       </div>
     </div>
   )
 }
-
 export default App

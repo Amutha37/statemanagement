@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logUserOut } from '../reducers/loginReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const LoggedInUser = () => {
   const dispatch = useDispatch()
@@ -11,11 +12,12 @@ const LoggedInUser = () => {
   //  === signoff ===
   const signOff = () => {
     dispatch(logUserOut())
+    dispatch(setNotification(`See you again  ${user.username}`, 5))
   }
   return (
-    <div className='logInBy'>
+    <div>
       <p>Logged-in : {user.name} </p>
-      <button type='button' onClick={signOff}>
+      <button id='sign_out' type='button' onClick={signOff}>
         Log Out
       </button>
     </div>

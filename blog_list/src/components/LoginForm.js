@@ -3,6 +3,7 @@ import { useField } from '../hooks'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/loginReducer'
 import PropTypes from 'prop-types'
+import { setNotification } from '../reducers/notificationReducer'
 
 const LoginForm = () => {
   const { reset: resetUsername, ...username } = useField('text')
@@ -28,6 +29,7 @@ const LoginForm = () => {
       password: password.value,
     }
     dispatch(loginUser(credentials))
+    dispatch(setNotification(`Welcome ${credentials.username}`, 5))
     resetUsername()
     resetPassword()
     // username.reset()

@@ -10,10 +10,13 @@ const Notification = () => {
     border: 'solid',
     backgroundColor: 'grey',
     padding: 15,
-    borderWidth: 1,
+    borderWidth: 2,
     marginBottom: 30,
     borderRadius: 5,
     color: 'yellow',
+    width: 800,
+    marginRight: 'auto',
+    marginLeft: 'auto',
   }
   return <div style={style}>{notification}</div>
 }

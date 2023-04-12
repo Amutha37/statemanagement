@@ -1,50 +1,63 @@
-import { useMatch } from 'react-router-dom'
-import About from './About'
-import { Routes, Route, Link } from 'react-router-dom'
-import CreateNew from './CreateNew'
-import Anecdote from './Anecdote'
-import AnecdoteList from './AnecdoteList'
+import {
+  // BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useMatch,
+} from 'react-router-dom'
+
+import LoggedInUser from './LoggedInUser'
+import Notification from './Notification'
+import Home from './Home'
+import EachBlog from './EachBlog'
+import BlogList from './BlogList'
+
+import Users from './Users'
 
 const Menu = (props) => {
-  const anecdotes = props.anecdotes
-  const addNew = props.addNew
+  const blogs = props.blogs
+  const logedUser = props.logedUser
+  console.log('blogsmenu', blogs)
+  // const addNew = props.addNew
 
-  const match = useMatch('/anecdotes/:id')
-  const anecdote = match
-    ? anecdotes.find((anecdote) => anecdote.id === Number(match.params.id))
+  const match = useMatch('/blogs/:id')
+
+  const blog = match
+    ? blogs.find((blog) => blog.id === Number(match.params.id))
     : null
-
+  console.log('blogmenu', blog)
+  const padding = {
+    padding: 5,
+  }
   return (
-    <>
-      <div id='nav_bar'>
-        <Link className='link' to='/'>
-          Home
-        </Link>
-        <Link className='link' to='/anecdotes'>
-          Anecdotes
-        </Link>
-        <Link className='link' to='/create'>
-          Create
-        </Link>
-        <Link className='link' to='/about'>
-          About
-        </Link>
-      </div>
+    <div id='nav_bar'>
+      <Link style={padding} to='/blogs'>
+        Blogs
+      </Link>
+      <Link style={padding} to='/users'>
+        Users
+      </Link>
+      <Link style={padding} to='/'>
+        Home
+      </Link>
+      {/* {user && (
+            <Link style={padding} to='/login'>
+              LogOut
+            </Link>
+          )} */}
+
+      {logedUser && <LoggedInUser logedUser={logedUser} />}
+      <Notification />
 
       <Routes>
-        <Route
-          path='/anecdotes/:id'
-          element={<Anecdote anecdote={anecdote} />}
-        />
-        <Route
-          path='/anecdotes'
-          element={<AnecdoteList anecdotes={anecdotes} />}
-        />
-        <Route path='/create' element={<CreateNew addNew={addNew} />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+        <Route path='/blogs/:id' element={<EachBlog blog={blog} />} />
+
+        <Route path='/blogs' element={<BlogList logedUser={logedUser} />} />
+        <Route path='/users' element={<Users />} />
+        <Route path='/' element={<Home />} />
+        {logedUser && <Route path='/' element={<Home />} />}
       </Routes>
-    </>
+    </div>
   )
 }
 export default Menu

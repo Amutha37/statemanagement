@@ -1,26 +1,24 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateNewLikes, deleteCurrentBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
-import { useDispatch } from 'react-redux'
 
-const Blog = ({ blog }) => {
+import PropTypes from 'prop-types'
+
+const Blog = ({ blog, seq }) => {
+  const user = useSelector((state) => state.user)
+
   const [showDetails, setShowDetails] = useState(false)
+
   const dispatch = useDispatch()
+  if (!blog) return null
+  if (!user) return null
 
-  // {blogUserName === logedUser
-  // console.log('user', user)
-
+  // if (!blog.user.name) return null
   let blogUserName = blog.user.name
 
-  const logedUser = user.name
-
   if (!blogUserName) {
-    blogUserName = logedUser
-  }
-
-  const handleLike = () => {
-    dispatch(updateNewLikes(blog))
-    dispatch(setNotification(`You added likes for : '${blog.title}'`, 5))
+    blogUserName = user.name
   }
 
   const handleBtn = () => setShowDetails(!showDetails)
@@ -28,7 +26,23 @@ const Blog = ({ blog }) => {
   const showBlogInfo = { display: showDetails ? '' : 'none' }
   const buttonLabel = showDetails ? 'Hide' : 'More...'
 
-  const handleDeleteBlog = () => {
+  // let blogUserName = blog.user.name
+
+  // const logedUser = user.name
+
+  // if (!blogUserName) {
+  //   blogUserName = logedUser
+  // }
+
+  const handleLike = () => {
+    dispatch(updateNewLikes(blog))
+
+    dispatch(
+      setNotification(`Blog ${blog.title} successfully updated`, 'success', 5)
+    )
+  }
+
+  const handleDelete = () => {
     const sureToDelete = window.confirm(
       `Confirm remove blog you're don't need!  :${blog.title}`
     )
@@ -44,7 +58,7 @@ const Blog = ({ blog }) => {
       <div className='table_wraper blog'>
         <ul>
           <li id='userRender'>
-            {ind + 1}. user :{blogUserName}
+            {seq + 1}. user :{blogUserName}
           </li>
 
           {/* <li className='title'>user : {blog.user.name}</li> */}
@@ -52,7 +66,9 @@ const Blog = ({ blog }) => {
           <li className='author'>By : {blog.author}</li>
 
           <div style={showBlogInfo} className='blogAll'>
-            <li>Url : {blog.url}</li>
+            <li>
+              Url : <a href={blog.url}>{blog.url}</a>
+            </li>
             {/* <li>user : {!blogUserName ? logedUser : blog.user.name}</li> */}
             <li id='likesCount'>
               Likes : {blog.likes}{' '}
@@ -60,14 +76,14 @@ const Blog = ({ blog }) => {
                 Like
               </button>
               {/* button to delete */}
-              {blogUserName === logedUser && (
+              {blogUserName === user.name && (
                 <button
-                  className='del_btn'
+                  id='del_btn'
                   type='button'
-                  onClick={handleDeleteBlog}
+                  onClick={handleDelete}
                   // value={blog.id}
                 >
-                  Remove
+                  Delete
                 </button>
               )}
             </li>
@@ -95,4 +111,9 @@ const Blog = ({ blog }) => {
     </>
   )
 }
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+}
+
 export default Blog
