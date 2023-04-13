@@ -22,11 +22,22 @@ const UserBlogs = () => {
   return (
     <>
       <h3>{userBlogs.name}</h3>
-      {userBlogs.blogs.map((blog, i) => (
-        <ol>
-          <li>{blog.title} </li>
-        </ol>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th>Seq.</th>
+            <th>Blog Title</th>
+          </tr>
+        </thead>
+        {userBlogs.blogs.map((blog, i) => (
+          <tbody key={blog.id}>
+            <tr>
+              <td>{i + 1}. </td>
+              <td>{blog.title}</td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
     </>
   )
 }
