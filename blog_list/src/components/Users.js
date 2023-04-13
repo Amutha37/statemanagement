@@ -1,19 +1,12 @@
-import React from 'react'
+// import React from 'react'
 import UserBlogs from './UserBlogs'
-// import { Link } from 'react-router-dom'
-
+import { Link, useMatch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Users = () => {
   const users = useSelector((state) => state.users)
 
   console.log('users', users)
-
-  const handleUser = ({ target }) => {
-    const userId = target.value
-    console.log('userIduserlist', userId)
-    return <UserBlogs userId={userId} />
-  }
 
   return (
     <div>
@@ -32,13 +25,11 @@ const Users = () => {
           <tbody key={user.id}>
             <tr>
               <td>{i + 1}. </td>
-              <td onClick={handleUser}>
+              <td>
                 {' '}
                 {/* <Link to={`/users/${ user.id }`}> */}
                 {/* style="float: right" */}
-                <button type='button' value={user.id} onClick={handleUser}>
-                  {user.username}
-                </button>
+                <Link to={`/users/${user.id}`}>{user.username}</Link>
               </td>
 
               <td>{user.blogs.length}</td>

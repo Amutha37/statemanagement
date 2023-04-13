@@ -1,4 +1,4 @@
-// import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useField } from '../hooks'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/loginReducer'
@@ -10,6 +10,7 @@ const LoginForm = () => {
   const { reset: resetPassword, ...password } = useField('password')
   // const username = useField('text')
   // const password = useField('text')
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // LoginForm.propTypes = {
@@ -21,7 +22,7 @@ const LoginForm = () => {
 
   // === handle Login ===
 
-  const handleLogin = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     const credentials = {
@@ -32,6 +33,7 @@ const LoginForm = () => {
     dispatch(setNotification(`Welcome ${credentials.username}`, 5))
     resetUsername()
     resetPassword()
+    navigate('/')
     // username.reset()
     // password.reset()
   }
@@ -60,7 +62,7 @@ const LoginForm = () => {
     <div>
       <h2>Login</h2>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <div>
           username
           <input
@@ -82,7 +84,7 @@ const LoginForm = () => {
           />
         </div>
 
-        <button type='submit' id='login-button' onClick={handleLogin}>
+        <button type='submit' id='login-button' onClick={handleSubmit}>
           LogIn
         </button>
         <button onClick={handleReset}>Reset</button>
