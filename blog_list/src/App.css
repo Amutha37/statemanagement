@@ -150,3 +150,65 @@ tbody:nth-child(even) {
   font-weight: 700;
   margin-bottom: 1rem;
 }
+/* #comment_selection button {
+  margin-right: 1rem;
+  outline: none;
+  background-color: #f9a300;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+  outline: none;
+} */
+#comment_selection {
+  background-color: #f88f00;
+  border: none;
+  height: 60px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+button.launch {
+  background-color: #f9a300;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+button.launch:hover {
+  cursor: pointer;
+  background-color: #fabd44;
+}
+
+button.change {
+  background-color: #f88f00;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+button.change:hover {
+  cursor: pointer;
+  background-color: #f89900;
+}
+button:focus {
+  outline: 0;
+}

@@ -21,9 +21,7 @@ const create = async (newObject) => {
   let config = {
     headers: { Authorization: token },
   }
-
   const request = await axios.post(baseUrl, newObject, config)
-  console.log('newlycreated', request.data)
   return request.data
 }
 
@@ -34,9 +32,19 @@ const updateLikes = async (id, newLike) => {
 
   const response = await axios.put(`${baseUrl}/${id}`, newLike, config)
 
-  console.log('blogservice', 'response.data', response.data)
   // const response = await axios.get(`${baseUrl}/${newLike.id}`, newLike, config)
 
+  return response.data
+}
+
+const addComment = async (id, comment) => {
+  // const config = {
+  //   headers: { Authorization: token },
+  // }
+  console.log('addNewComment', comment, 'id', id)
+  const response = await axios.post(`${baseUrl}/${id}/comments`, { comment })
+  // post(baseUrl, newObject, config)
+  console.log('responseComment', response.data)
   return response.data
 }
 
@@ -44,7 +52,7 @@ const deleteBlog = async (id) => {
   const config = {
     headers: { Authorization: token },
   }
-  const request = await axios.delete(`${baseUrl}/${id}`, config)
+  const request = await axios.delete(`${baseUrl}/:${id}`, config)
   const response = request
   return response.data
 }
@@ -61,6 +69,7 @@ const blogService = {
   getAll,
   create,
   updateLikes,
+  addComment,
   deleteBlog,
   setToken,
 }

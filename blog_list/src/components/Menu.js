@@ -1,10 +1,4 @@
-import {
-  // BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useMatch,
-} from 'react-router-dom'
+import { Routes, Route, Link, useMatch, Navigate } from 'react-router-dom'
 
 import LoggedInUser from './LoggedInUser'
 import Notification from './Notification'
@@ -12,13 +6,13 @@ import Home from './Home'
 import EachBlog from './EachBlog'
 import UserBlogs from './UserBlogs'
 import BlogList from './BlogList'
-import { useSelector } from 'react-redux'
 
 import Users from './Users'
 
 const Menu = (props) => {
   const blogs = props.blogs
   const logedUser = props.logedUser
+
   // const users = useSelector((state) => state.users)
 
   // display cliked blog
@@ -31,17 +25,6 @@ const Menu = (props) => {
   const padding = {
     padding: 5,
   }
-  // const matchuser = useMatch('/users/:id')
-
-  // const userBlog = matchuser
-  //   ? users.find((blog) => blog.id === matchuser.params.id)
-  //   : null
-
-  // if (!userBlog) {
-  //   return null
-  // }
-
-  // console.log('users', users, 'userBlog', userBlog)
 
   return (
     <div id='nav_bar'>
@@ -51,16 +34,26 @@ const Menu = (props) => {
       <Link style={padding} to='/users'>
         Users
       </Link>
+
       {/* {logedUser ? (
-        <em>{logedUser} logged in</em>
+        <em>{logedUser} LoggedIn</em>
       ) : (
         <Link style={padding} to='/login'>
-          login
+          Login
         </Link>
       )} */}
       <Link style={padding} to='/'>
         Home
       </Link>
+
+      {/* {logedUser ? (
+            <em>{logedUser} LoggedIn</em>
+          ) : (
+            <Link style={padding} to='/login'>
+              Login
+            </Link>
+          )} */}
+
       {/* {user && (
             <Link style={padding} to='/login'>
               LogOut
@@ -74,8 +67,11 @@ const Menu = (props) => {
         <Route path='/blogs/:id' element={<EachBlog blog={blog} />} />
 
         <Route path='/blogs' element={<BlogList logedUser={logedUser} />} />
-        <Route path='/users' element={<Users />} />
-
+        {/* <Route path='/users' element={<Users />} /> */}
+        <Route
+          path='/users'
+          element={logedUser ? <Users /> : <Navigate replace to='/login' />}
+        />
         <Route path='/users/:id' element={<UserBlogs />} />
 
         <Route path='/' element={<Home />} />

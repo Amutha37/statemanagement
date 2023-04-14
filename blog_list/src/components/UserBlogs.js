@@ -21,7 +21,7 @@ const UserBlogs = () => {
 
   return (
     <>
-      <h3>{userBlogs.name}</h3>
+      <h3> Blog list from {userBlogs.name} </h3>
       <table>
         <thead>
           <tr>
