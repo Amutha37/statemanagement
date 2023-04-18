@@ -1,73 +1,86 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useField } from '../hooks'
+import { createBlogInfo } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const BlogForm = ({ createBlog }) => {
-  // == new blog list local state ===
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+import styled from 'styled-components'
 
-  // === handle change ===
-  const handleChangeTitle = (event) => {
-    setTitle(event.target.value)
-  }
-  const handleChangeAuthor = (event) => {
-    setAuthor(event.target.value)
-  }
-  const handleChangeUrl = (event) => {
-    setUrl(event.target.value)
-  }
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 3px solid Chocolate;
+  border-radius: 3px;
+`
 
-  // === add blog ===
+const Input = styled.input`
+  margin: 0.25em;
+`
+const TomatoButton = styled(Button)`
+  background: tomato;
+`
 
-  const addBlog = (e) => {
+const BlogForm = ({ togglableRef }) => {
+  // const title = useField('text')
+  // const author = useField('text')
+  // const url = useField('text')
+  // const reset = useField('')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { reset: resetTitle, ...title } = useField('text')
+  const { reset: resetAuthor, ...author } = useField('text')
+  const { reset: resetUrl, ...url } = useField('text')
+
+  const handleSubmit = (e) => {
     e.preventDefault()
+    togglableRef.current.toggleVisibility()
 
-    createBlog({
-      title,
-      author,
-      url,
-    })
+    const newBlogInfo = {
+      title: title.value,
+      author: author.value,
+      url: url.value,
+      // user: {
+      //   name: { user },
+      // },
+    }
+    dispatch(createBlogInfo(newBlogInfo))
+    dispatch(setNotification(`Added new blog list : ${newBlogInfo.title}`, 5))
 
-    setTitle('')
-    setUrl('')
-    setAuthor('')
+    resetTitle()
+    resetAuthor()
+    resetUrl()
+    navigate('/blogs')
+  }
+
+  const handleReset = (e) => {
+    e.preventDefault()
+    resetTitle()
+    resetAuthor()
+    resetUrl()
   }
 
   return (
-    <div className='newBlog'>
-      <h2>Create a new blog list</h2>
-      <form onSubmit={addBlog}>
-        <label>
-          Title
-          <input
-            type='text'
-            value={title}
-            id='title'
-            placeholder='title'
-            onChange={handleChangeTitle}
-          />
-        </label>
-        <label>
-          Author
-          <input
-            type='text'
-            value={author}
-            id='author'
-            placeholder='author'
-            onChange={handleChangeAuthor}
-          />
-        </label>
-        <label>
-          URL
-          <input
-            type='text'
-            value={url}
-            id='url'
-            placeholder='web url'
-            onChange={handleChangeUrl}
-          />
-        </label>
-        <button type='submit'>Save</button>
+    <div>
+      <h2>Create A New Blog List</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          Tittle :
+          <Input label='title' {...title} />
+        </div>
+        <div>
+          Author :
+          <Input label='author' {...author} />
+        </div>
+        <div>
+          URL :
+          <Input label='url' {...url} />
+        </div>
+        <Button>Create </Button>
+        <TomatoButton Click={handleReset}>Reset</TomatoButton>
       </form>
     </div>
   )

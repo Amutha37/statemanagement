@@ -1,9 +1,26 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { logUserOut } from '../reducers/loginReducer'
+import { useDispatch } from 'react-redux'
+
+const Button = styled.button`
+  background: tomato;
+  border-radius: 3px;
+  border: none;
+  color: white;
+`
 
 const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)
+  const dispatch = useDispatch()
 
+  const lab = props.buttonLabel
+
+  console.log('props', props, 'lab', lab)
+  if (lab === 'Log In') {
+    dispatch(logUserOut())
+  }
   Togglable.displayName = 'Togglable'
 
   Togglable.propTypes = {
@@ -28,11 +45,12 @@ const Togglable = forwardRef((props, ref) => {
   return (
     <div className='login_form_container'>
       <div style={hideLoginInput}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <Button onClick={toggleVisibility}>{props.buttonLabel}</Button>
       </div>
       <div style={showLoginInput}>
         {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
+        <Button onClick={toggleVisibility}>cancel</Button>
+        {/* <button onClick={toggleVisibility}>cancel</button> */}
       </div>
     </div>
   )

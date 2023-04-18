@@ -1,55 +1,50 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { setNotification } from './notificationReducer'
-
-import { setUser, clearUser } from '../services/users'
+import userService from '../services/user'
 import loginService from '../services/login'
 
 const loginSlice = createSlice({
-  name: 'login',
+  name: 'user',
   initialState: null,
   reducers: {
-    login(state, action) {
+    setLogin(state, action) {
       return action.payload
     },
-    logout(state, action) {
+    setLogoff(state, action) {
+      return action.payload
+    },
+    setUser(state, action) {
       return action.payload
     },
   },
 })
 
-export const { login, logout } = loginSlice.actions
+export const { setUser, setLogin, setLogoff } = loginSlice.actions
 
-export const logUserIn = (credentials) => {
+export const initialUser = () => {
+  return async (dispatch) => {
+    const user = await userService.getUser()
+
+    dispatch(setUser(user))
+  }
+}
+
+export const loginUser = (credentials) => {
   return async (dispatch) => {
     const { username, password } = credentials
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      })
-      setUser(user)
-      dispatch(login(user))
-      dispatch(setNotification(`User  ${user.name}`, 5))
-      // dispatch(
-      //   Notification({ message: `Welcome ${user.name}!`, type: 'info' }, 5)
-      // )
-    } catch (error) {
-      setNotification(`Error occured :  ${error.response.data.error}`, 5)
-      // dispatch(
-      //   createNotification(
-      //     { message: error.response.data.error, type: 'error' },
-      //     5
-      //   )
-      // )
-    }
+    const user = await loginService.login({ username, password })
+    userService.setUser(user)
+    dispatch(setLogin(user))
   }
 }
 
 export const logUserOut = () => {
   return async (dispatch) => {
-    clearUser()
-    dispatch(logout(null))
+    userService.removeUser()
+    dispatch(setLogoff(null))
   }
 }
+
+// const user = await loginService.getUser()
+// dispatch(setUser(user))
 
 export default loginSlice.reducer

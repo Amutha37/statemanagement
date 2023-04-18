@@ -1,11 +1,11 @@
 import axios from 'axios'
-const baseUrl = '/api/login'
+const baseUserUrl = '/api/login'
 
-const login = async (credentials) => {
-  const response = await axios.post(baseUrl, credentials)
+export const login = async (credentials) => {
+  const { username, password } = credentials
+  const response = await axios.post(baseUserUrl, { username, password })
   return response.data
 }
-
 const loginService = { login }
 
 export default loginService
