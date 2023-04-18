@@ -3,6 +3,7 @@ import { createComment } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 import React, { useState } from 'react'
+import ListComments from './ListComments'
 
 const CommentForm = ({ blog }) => {
   const [showForm, setShowForm] = useState(false)
@@ -10,34 +11,17 @@ const CommentForm = ({ blog }) => {
 
   const { reset: resetComment, ...comment } = useField('text')
 
-  console.log('blogcommentID', blog)
   let { id, comments } = blog
   const handleCommentSubmit = (e) => {
     e.preventDefault()
-    const newComment = comment.value
-
-    console.log(
-      'blogcommentID',
-      blog,
-      'newComment',
-      newComment,
-      'blogid',
-      id,
-      '  comments',
-      comments
-    )
-    dispatch(createComment(id, comment.value.trim()))
-
-    dispatch(setNotification(`Comment added  : ${newComment}`, 5))
-    resetComment()
+    const newComment = comment.value.trim()
+    writeComment(newComment)
   }
 
-  const handleReset = (e) => {
-    e.preventDefault()
-    resetComment()
-  }
   const handlePreFix = (e) => {
     e.preventDefault()
+    const btnText = e.target.innerText
+    writeComment(btnText)
   }
 
   const handleAddComment = (e) => {
@@ -45,9 +29,20 @@ const CommentForm = ({ blog }) => {
     setShowForm(!showForm)
   }
 
-  // let comments = blog.comments
+  const writeComment = (commentToAdd) => {
+    dispatch(createComment(id, commentToAdd))
+
+    dispatch(setNotification(`Comment added  : ${commentToAdd}`, 5))
+    resetComment()
+  }
+
+  const handleReset = (e) => {
+    e.preventDefault()
+    resetComment()
+  }
+
   if (!comments) {
-    comments = {}
+    comments = []
   }
   return (
     <div>
@@ -81,13 +76,10 @@ const CommentForm = ({ blog }) => {
       )}
 
       <div>
-        {comments.length && (
-          <ol>
-            {comments.map((comment, i) => (
-              <li key={i}>{comment}</li>
-            ))}
-          </ol>
-        )}
+        {comments &&
+          comments.map((comment, i) => (
+            <ListComments comment={comment} key={i} />
+          ))}
       </div>
     </div>
   )

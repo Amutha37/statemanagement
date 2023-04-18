@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux'
-
-// anecdotes: anecdoteReducer,
-//   filter: filterReducer,
+// import Alert from 'react-bootstrap/Alert'
 
 const Notification = () => {
   const notification = useSelector((state) => state.notification)
@@ -19,6 +17,7 @@ const Notification = () => {
     marginLeft: 'auto',
   }
   return <div style={style}>{notification}</div>
+  // return <Alert variant='success'>{notification}</Alert>
 }
 
 export default Notification

@@ -16,7 +16,7 @@ const LoggedInUser = () => {
   }
   return (
     <div>
-      <p>Logged-in : {user.name} </p>
+      {/* <p>Logged-in : {user.name} </p> */}
       <button id='sign_out' type='button' onClick={signOff}>
         Log Out
       </button>

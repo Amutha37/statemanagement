@@ -2,13 +2,32 @@ import { useField } from '../hooks'
 import { createBlogInfo } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const BlogForm = ({ togglableRef, user }) => {
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 3px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+`
+const TomatoButton = styled(Button)`
+  background: tomato;
+`
+
+const BlogForm = ({ togglableRef }) => {
   // const title = useField('text')
   // const author = useField('text')
   // const url = useField('text')
   // const reset = useField('')
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { reset: resetTitle, ...title } = useField('text')
   const { reset: resetAuthor, ...author } = useField('text')
@@ -22,15 +41,17 @@ const BlogForm = ({ togglableRef, user }) => {
       title: title.value,
       author: author.value,
       url: url.value,
-      user: {
-        name: { user },
-      },
+      // user: {
+      //   name: { user },
+      // },
     }
     dispatch(createBlogInfo(newBlogInfo))
     dispatch(setNotification(`Added new blog list : ${newBlogInfo.title}`, 5))
+
     resetTitle()
     resetAuthor()
     resetUrl()
+    navigate('/blogs')
   }
 
   const handleReset = (e) => {
@@ -46,19 +67,19 @@ const BlogForm = ({ togglableRef, user }) => {
 
       <form onSubmit={handleSubmit}>
         <div>
-          Content :
-          <input label='title' {...title} />
+          Tittle :
+          <Input label='title' {...title} />
         </div>
         <div>
           Author :
-          <input label='author' {...author} />
+          <Input label='author' {...author} />
         </div>
         <div>
           URL :
-          <input label='url' {...url} />
+          <Input label='url' {...url} />
         </div>
-        <button>Create </button>
-        <button onClick={handleReset}>Reset</button>
+        <Button>Create </Button>
+        <TomatoButton Click={handleReset}>Reset</TomatoButton>
       </form>
     </div>
   )

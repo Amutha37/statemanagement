@@ -1,6 +1,6 @@
 const Home = () => (
   <div className='container'>
-    <h2> Blogs List App</h2>
+    {/* <h2> Blogs List App</h2> */}
     <p>
       {` This app list usefull blog post. User can navigate through other user and each user's blogs collection. `}
     </p>

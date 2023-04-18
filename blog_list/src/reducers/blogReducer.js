@@ -42,20 +42,19 @@ export const createBlogInfo = (content) => {
       const newBlogInfo = await blogService.create(content)
       dispatch(appendBlog(newBlogInfo))
     } catch (error) {
-      dispatch(setNotification(`Error  : '${error.message}'`, 5))
+      dispatch(setNotification(`Error on create blog  : '${error.message}'`, 5))
       console.log(error)
     }
   }
 }
 
 export const createComment = (id, commentedBlog) => {
-  console.log('commentedBlog', commentedBlog, 'blogid', id)
   return async (dispatch) => {
     try {
       const blogComment = await blogService.addComment(id, commentedBlog)
       dispatch(addUpdates(blogComment))
     } catch (error) {
-      dispatch(setNotification(`Error  : '${error.message}'`, 5))
+      dispatch(setNotification(` Error on commenting : '${error.message}'`, 5))
     }
   }
 }
@@ -78,7 +77,9 @@ export const updateNewLikes = (blog) => {
     try {
       await blogService.updateLikes(id, newLike)
     } catch (error) {
-      dispatch(setNotification(`Error  : '${error.message}'`, 5))
+      dispatch(
+        setNotification(` Error on update likes : '${error.message}'`, 5)
+      )
     }
   }
 }

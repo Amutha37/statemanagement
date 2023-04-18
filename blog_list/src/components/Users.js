@@ -1,6 +1,4 @@
-// import React from 'react'
-import UserBlogs from './UserBlogs'
-import { Link, useMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Users = () => {
@@ -29,7 +27,7 @@ const Users = () => {
                 {' '}
                 {/* <Link to={`/users/${ user.id }`}> */}
                 {/* style="float: right" */}
-                <Link to={`/users/${user.id}`}>{user.username}</Link>
+                <Link to={`/users/${user.id}`}>{user.name}</Link>
               </td>
 
               <td>{user.blogs.length}</td>

@@ -5,6 +5,7 @@ import { setNotification } from '../reducers/notificationReducer'
 
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 const Blog = ({ blog, seq }) => {
   const user = useSelector((state) => state.user)
@@ -117,6 +118,13 @@ const Blog = ({ blog, seq }) => {
           </td>
           <td style={showBlogInfo}>
             {blog.likes}{' '}
+            {/* <Button
+              variant='outline-success'
+              value={blog.id}
+              onClick={handleLike}
+            >
+              Like
+            </Button>{' '} */}
             <button id='like_btn' value={blog.id} onClick={handleLike}>
               Like
             </button>
@@ -124,14 +132,17 @@ const Blog = ({ blog, seq }) => {
 
           {blogUserName === user.name && (
             <td style={showBlogInfo}>
-              <button
+              <Button variant='outline-danger' onClick={handleDelete}>
+                Delete
+              </Button>
+              {/* <button
                 id='del_btn'
                 type='button'
-                onClick={handleDelete}
+
                 // value={blog.id}
               >
                 Delete
-              </button>
+              </button> */}
             </td>
           )}
           {/* </tr> */}
