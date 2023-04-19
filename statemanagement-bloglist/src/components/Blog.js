@@ -16,7 +16,7 @@ const Blog = ({ blog, seq }) => {
   if (!blog) return null
   if (!user) return null
 
-  // if (!blog.user.name) return null
+  
   let blogUserName = blog.user.name
 
   if (!blogUserName) {

@@ -9,6 +9,7 @@ import BlogFormInput from './BlogFormInput'
 import Footer from './Footer'
 import Users from './Users'
 import LoginForm from './LoginForm'
+import LogOut from './LogOut'
 
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -28,11 +29,11 @@ const Menu = (props) => {
   const blogs = props.blogs
   const logedUser = props.logedUser
   const blogFormRef = props.blogFormRef
-  console.log('props', props.blogFormRef)
+
   const notification = useSelector((state) => state.notification)
   const user = useSelector((state) => state.user)
 
-  // display cliked blog
+
   const matchblog = useMatch('/blogs/:id')
 
   const blog = matchblog
@@ -41,12 +42,10 @@ const Menu = (props) => {
 
   // const padding = {
   //   padding: 5,
-  //   // textDecoration: '',
-  //   textDecoration: 'none',
   // }
 
   return (
-    <div id='nav_bar'>
+    <div >
       <Page>
         <Navigation>
           <Link className='link' to='/'>
@@ -72,7 +71,7 @@ const Menu = (props) => {
           )}
 
           {user.name && (
-            <Link className='link' to='/login'>
+            <Link id='logOut' className='link' to='/logout'>
               LogOut
             </Link>
           )}
@@ -92,6 +91,7 @@ const Menu = (props) => {
             path='/users'
             element={logedUser ? <Users /> : <Navigate replace to='/login' />}
           />
+
           <Route path='/login' element={<LoginForm />} />
           <Route path='/users/:id' element={<UserBlogs />} />
 
@@ -100,15 +100,14 @@ const Menu = (props) => {
             element={<BlogFormInput blogFormRef={blogFormRef} />}
           />
 
-          {/* <BlogForm logedUser={logedUser} togglableRef={blogFormRef} />
-           */}
-          {/* <BlogForm logedUser={logedUser} /> */}
-
+        
+<Route path='/logout' element={<LogOut />} />
           <Route path='/' element={<Home />} />
           {logedUser && <Route path='/' element={<Home />} />}
         </Routes>
-        <Footer />
+    
       </Page>
+    <Footer />
     </div>
   )
 }

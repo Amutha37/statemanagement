@@ -7,6 +7,8 @@ import styled from 'styled-components'
 // import PropTypes from 'prop-types'
 import { setNotification } from '../reducers/notificationReducer'
 
+
+
 const Button = styled.button`
   background: Bisque;
   font-size: 1em;
@@ -21,13 +23,17 @@ const Input = styled.input`
 `
 
 const LoginForm = () => {
+const dispatch = useDispatch()
+
+  
+
   const { reset: resetUsername, ...username } = useField('text')
   const { reset: resetPassword, ...password } = useField('password')
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  
 
-  // dispatch(logUserOut())
+
 
   // === handle Login ===
 

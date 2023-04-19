@@ -47,7 +47,7 @@ const BlogForm = ({ togglableRef }) => {
       // },
     }
     dispatch(createBlogInfo(newBlogInfo))
-    dispatch(setNotification(`Added new blog list : ${newBlogInfo.title}`, 5))
+    dispatch(setNotification(`Added new blog link to list : ${newBlogInfo.title}`, 5))
 
     resetTitle()
     resetAuthor()

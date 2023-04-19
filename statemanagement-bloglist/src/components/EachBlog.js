@@ -3,7 +3,7 @@ import CommentForm from './CommentForm'
 
 const EachBlog = ({ blog }) => {
   if (!blog) return null
-  console.log('blogeachblog', blog)
+  
   return (
     <div>
       <h4>{blog.title}</h4>

@@ -5,7 +5,7 @@ const Home = () => (
       <h2>Blogs List App</h2>
     </header>
     <p>
-      {` This app list usefull blog post. User can navigate through other user and each user's blogs collection. `}
+      {` This app list usefull blog post links. User can navigate through other users listings  and each user's blogs collection. `}
     </p>
 
     <p>
@@ -13,7 +13,7 @@ const Home = () => (
     </p>
 
     <p>
-      {`Users collect their favourite blogs site and these can be views by all users. Individual user maintain their collection by deleting blogs they find no longer useful.`}
+      {`Users collect their favourite blogs site and these can be viewed by all users. Individual user maintain their collection by deleting blogs they find no longer useful.`}
     </p>
   </div>
 )

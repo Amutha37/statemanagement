@@ -4,7 +4,7 @@ import styled from 'styled-components'
 let Footerr = styled.div`
   background: Chocolate;
   padding: 1em;
-  margin-top: 1em;
+
 `
 const Footer = () => (
   <Footerr>

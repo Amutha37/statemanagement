@@ -37,9 +37,9 @@ function App() {
           <LoginForm />
         </Togglable>
       )}
-      {logedUser && (
+      {logedUser && ( 
         <Menu blogs={blogs} logedUser={logedUser} blogFormRef={blogFormRef} />
-      )}
+       )}
     </div>
   )
 }
