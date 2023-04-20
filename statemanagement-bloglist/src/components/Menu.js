@@ -33,7 +33,6 @@ const Menu = (props) => {
   const notification = useSelector((state) => state.notification)
   const user = useSelector((state) => state.user)
 
-
   const matchblog = useMatch('/blogs/:id')
 
   const blog = matchblog
@@ -45,7 +44,7 @@ const Menu = (props) => {
   // }
 
   return (
-    <div >
+    <div id='nav_bar'>
       <Page>
         <Navigation>
           <Link className='link' to='/'>
@@ -93,6 +92,7 @@ const Menu = (props) => {
           />
 
           <Route path='/login' element={<LoginForm />} />
+
           <Route path='/users/:id' element={<UserBlogs />} />
 
           <Route
@@ -100,14 +100,13 @@ const Menu = (props) => {
             element={<BlogFormInput blogFormRef={blogFormRef} />}
           />
 
-        
-<Route path='/logout' element={<LogOut />} />
+          <Route path='/logout' element={<LogOut />} />
+
           <Route path='/' element={<Home />} />
           {logedUser && <Route path='/' element={<Home />} />}
         </Routes>
-    
       </Page>
-    <Footer />
+      <Footer />
     </div>
   )
 }

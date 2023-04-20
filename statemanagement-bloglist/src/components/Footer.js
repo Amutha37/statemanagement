@@ -4,7 +4,6 @@ import styled from 'styled-components'
 let Footerr = styled.div`
   background: Chocolate;
   padding: 1em;
-
 `
 const Footer = () => (
   <Footerr>
@@ -13,11 +12,6 @@ const Footer = () => (
     </div>
     Blogs List App for Part7f -{' '}
     <a href='https://fullstackopen.com/'>Full Stack Open</a>.
-    {/* See{' '}
-    <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>
-      https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js
-    </a>{' '}
-    for the source code. */}
   </Footerr>
 )
 

@@ -1,27 +1,21 @@
-import  { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { logUserOut } from '../reducers/loginReducer'
- import  {setNotification } from '../reducers/notificationReducer'
+import { setNotification } from '../reducers/notificationReducer'
 import { useNavigate } from 'react-router-dom'
 
-
 const LogOut = () => {
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-useEffect(() => {
-      dispatch(setNotification(`signout `, 5))
+  useEffect(() => {
+    dispatch(setNotification(`signout `, 5))
 
-   dispatch(logUserOut())
+    dispatch(logUserOut())
     navigate('/login')
-  }, [ dispatch, navigate])
+  }, [dispatch, navigate])
 
-return   null
-
-
-  
-
-
+  return null
 }
 
 export default LogOut

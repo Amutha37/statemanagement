@@ -1,7 +1,8 @@
- html, body {
-                margin: 0;
-                padding: 0;
-            }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
 }
@@ -110,7 +111,6 @@ ul {
   color: green;
 }
 .main_container {
-
   text-align: center;
 }
 #userRender {
@@ -209,7 +209,10 @@ Button {
   color: rgba(193, 74, 35, 0.787);
   font-weight: 600;
 }
-#logOut{
-color : blue;
-font-weight:800;
+#logOut {
+  color: blue;
+  font-weight: 800;
+}
+#reset {
+  background-color: red;
 }

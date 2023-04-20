@@ -20,6 +20,36 @@ npm install redux
 npm install @reduxjs/toolkit
 ```
 
+```
+npm install axios
+```
+
+```
+npm install redux
+```
+
+```
+npm install react-redux
+```
+
+```
+npm install @reduxjs/toolkit
+```
+
+```
+npm install prop-types
+```
+
+```
+npm install react-router-dom
+```
+
+Styling dependencies :
+
+```npm install styled-components
+
+```
+
 </details>
 
 <details>
@@ -42,5 +72,22 @@ npm install @reduxjs/toolkit
 - 7.19 - Comments are listed on the frontend and prefix comment are updated when clicked.
 - 7.20 - Style used from `Boostrap` library and `Styled Component` libraries.
 - 7.21 - Exercise finished by adding stying using multiple ways.
+
+</details>
+
+<details>
+<summary>
+
+### $\color{cyan}{Addition Features}$
+
+ </summary>
+
+- Added create new user fucntionallity.
+
+## Repository
+
+- The backend for this frontend repository is `blog_list_server` which runs in `localhost:3003`.
+
+- `npm run dev` the backend first before runnint the front end.
 
 </details>
