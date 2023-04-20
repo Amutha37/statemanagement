@@ -1,25 +1,22 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import  { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { logUserOut } from '../reducers/loginReducer'
+ import  {setNotification } from '../reducers/notificationReducer'
+import { useNavigate } from 'react-router-dom'
 
-const LoggedInUser = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state) => {
-    return state.user
-  })
 
-  //  === signoff ===
-  const signOff = () => {
-    dispatch(logUserOut())
-  }
-  return (
-    <div className='logInBy'>
-      <p>Logged-in : {user.name} </p>
-      {/* <button type='button' onClick={signOff}> */}
-      <p id='log_out'> Log In</p>
+const LogOut = () => {
+const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-      {/* </button> */}
-    </div>
-  )
+useEffect(() => {
+      dispatch(setNotification(`signout `, 5))
+
+   dispatch(logUserOut())
+    navigate('/login')
+  }, [ dispatch, navigate])
+
+return   null
 }
-export default LoggedInUser
+
+export default LogOut

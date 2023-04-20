@@ -29,9 +29,15 @@ export const initialUser = () => {
 }
 
 export const loginUser = (credentials) => {
+  const fullcredentials = {
+    blogs: [],
+    username: credentials.username,
+    name: credentials.username,
+    password: credentials.password,
+  }
   return async (dispatch) => {
-    const { username, password } = credentials
-    const user = await loginService.login({ username, password })
+    const { blogs, username, name, password } = fullcredentials
+    const user = await loginService.login({ blogs, username, name, password })
     userService.setUser(user)
     dispatch(setLogin(user))
   }

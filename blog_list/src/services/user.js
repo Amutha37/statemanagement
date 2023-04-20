@@ -23,9 +23,16 @@ const getUser = async () => {
   }
   return null
 }
-
+// remove from localstorage
 const removeUser = async () => {
   localStorage.clear()
+}
+
+// get all users
+const createNewUser = async (credentials) => {
+  const response = await axios.post(baseUserUrl, credentials)
+
+  return response.data
 }
 // get all users
 const getAllUsers = async () => {
@@ -49,5 +56,6 @@ const userService = {
   setUser,
   removeUser,
   getAllUsers,
+  createNewUser,
 }
 export default userService

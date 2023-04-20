@@ -57,7 +57,6 @@ const Blog = ({ blog, seq }) => {
 
   return (
     <>
-      {/* <div className='table_wraper blog'> */}
       <tbody className='table_wraper blog' key={user.id}>
         <tr>
           <td
@@ -69,13 +68,7 @@ const Blog = ({ blog, seq }) => {
             {seq + 1}.{' '}
           </td>
 
-          <td
-          // style={{
-          //   width: '20px',
-          // }}
-          >
-            {blogUserName}
-          </td>
+          <td>{blogUserName}</td>
           <td
             style={{
               width: '350px',
@@ -103,9 +96,6 @@ const Blog = ({ blog, seq }) => {
             </button>
           </td>
 
-          {/* show more  } */}
-          {/* <div > */}
-          {/* <tr> */}
           <td style={showBlogInfo}>
             <a
               style={{
@@ -118,13 +108,6 @@ const Blog = ({ blog, seq }) => {
           </td>
           <td style={showBlogInfo}>
             {blog.likes}{' '}
-            {/* <Button
-              variant='outline-success'
-              value={blog.id}
-              onClick={handleLike}
-            >
-              Like
-            </Button>{' '} */}
             <button id='like_btn' value={blog.id} onClick={handleLike}>
               Like
             </button>
@@ -135,42 +118,10 @@ const Blog = ({ blog, seq }) => {
               <Button variant='outline-danger' onClick={handleDelete}>
                 Delete
               </Button>
-              {/* <button
-                id='del_btn'
-                type='button'
-
-                // value={blog.id}
-              >
-                Delete
-              </button> */}
             </td>
           )}
-          {/* </tr> */}
-          {/* </div> */}
-          {/* <Link to={`/users/${ user.id }`}> */}
-          {/* style="float: right" */}
         </tr>
       </tbody>
-
-      {/* <div className='btn_blog togglableContent'>
-        <button
-          id='moreHideBtn'
-          style={
-            showDetails
-              ? {
-                  color: 'white',
-                  fontWeight: 'bold',
-                  backgroundColor: 'brown',
-                }
-              : { color: 'blue', fontWeight: 'bold' }
-          }
-          type='button'
-          onClick={handleBtn}
-        >
-          {buttonLabel}
-        </button>
-      </div> */}
-      {/* </div> */}
     </>
   )
 }

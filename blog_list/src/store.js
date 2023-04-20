@@ -13,6 +13,6 @@ const store = configureStore({
   },
 })
 
-console.log('store', store.getState())
+// console.log('store', store.getState())
 
 export default store

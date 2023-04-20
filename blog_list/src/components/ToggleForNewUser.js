@@ -9,12 +9,12 @@ const Button = styled.button`
   color: white;
 `
 
-const Togglable = forwardRef((props, ref) => {
+const ToggleForNewUser = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)
 
-  Togglable.displayName = 'Togglable'
+  ToggleForNewUser.displayName = 'ToggleForNewUser'
 
-  Togglable.propTypes = {
+  ToggleForNewUser.propTypes = {
     buttonLabel: PropTypes.string.isRequired,
   }
 
@@ -41,9 +41,10 @@ const Togglable = forwardRef((props, ref) => {
       <div style={showLoginInput}>
         {props.children}
         <Button onClick={toggleVisibility}>cancel</Button>
+        {/* <button onClick={toggleVisibility}>cancel</button> */}
       </div>
     </div>
   )
 })
 
-export default Togglable
+export default ToggleForNewUser

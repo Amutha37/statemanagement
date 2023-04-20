@@ -1,8 +1,3 @@
-import { useSelector } from 'react-redux'
-
-// anecdotes: anecdoteReducer,
-//   filter: filterReducer,
-
 const ListComments = ({ comment }) => {
   const style = {
     width: 500,

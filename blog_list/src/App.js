@@ -1,4 +1,4 @@
-import './App.css'
+import './app.css'
 import React, { useEffect, useRef } from 'react'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initialUser } from './reducers/loginReducer'
@@ -28,15 +28,22 @@ function App() {
   const logedUser = user
 
   blogs = blogs.slice().sort((a, b) => b.likes - a.likes)
-  console.log('blogs', blogs, 'sortedBlogs', blogs)
 
   return (
     <div className='main_container'>
-      {logedUser === null && (
-        <Togglable buttonLabel='Log In'>
-          <LoginForm />
-        </Togglable>
-      )}
+      {
+        logedUser === null && (
+          <Togglable buttonLabel='Log In'>
+            <LoginForm />
+          </Togglable>
+        )
+
+        // (
+        //   <ToggleForNewUser buttonLabel='New User'>
+        //     <CreateUserForm />
+        //   </ToggleForNewUser>
+        // )
+      }
       {logedUser && (
         <Menu blogs={blogs} logedUser={logedUser} blogFormRef={blogFormRef} />
       )}

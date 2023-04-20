@@ -8,10 +8,14 @@ const allUsersSlice = createSlice({
     setAllUsers(state, action) {
       return action.payload
     },
+    userDelete(state, action) {
+      const id = action.payload
+      return state.filter((user) => user.id !== id)
+    },
   },
 })
 
-export const { setAllUsers } = allUsersSlice.actions
+export const { setAllUsers, userDelete } = allUsersSlice.actions
 
 export const allUsers = () => {
   return async (dispatch) => {

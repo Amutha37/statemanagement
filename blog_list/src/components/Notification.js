@@ -17,7 +17,6 @@ const Notification = () => {
     marginLeft: 'auto',
   }
   return <div style={style}>{notification}</div>
-  // return <Alert variant='success'>{notification}</Alert>
 }
 
 export default Notification
