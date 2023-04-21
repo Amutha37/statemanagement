@@ -13,7 +13,7 @@
 
  </summary>
 
-- `statemanagement-bloglist` Front end part for statemanagement
+- `blog_list` Front end part for statemanagement
 
 </details>
 
