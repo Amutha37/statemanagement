@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useField } from '../hooks'
 import { useDispatch } from 'react-redux'
-// import { createUser } from '../reducers/CreateReducer'
 import userService from '../services/user'
 import styled from 'styled-components'
 // import PropTypes from 'prop-types'
@@ -61,17 +60,17 @@ const CreateUserForm = (props) => {
     <div>
       <h2>Create New User</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
-          username
+          Username :
           <Input label='username' {...username} />
         </div>
         <div>
-          name
+          Name :
           <Input label='name' {...name} />
         </div>
         <div>
-          password
+          Password :
           <Input label='password' {...password} autoComplete='off' />
         </div>
 

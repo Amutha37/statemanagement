@@ -12,10 +12,16 @@ const Footer = () => (
       <i>Blogs List App, Department of Computer Science 2023</i>
     </div>
     Blogs List App for Part7f -{' '}
-    <a href='https://fullstackopen.com/'>Full Stack Open</a>.{' '}
+    <a className='alink' href='https://fullstackopen.com/'>
+      Full Stack Open
+    </a>
+    .{' '}
     <div>
       See{' '}
-      <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>
+      <a
+        className='alink'
+        href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'
+      >
         https://github.com/Amutha37/fullstackopen/statemanagement-bloglist/
       </a>{' '}
       for the source code.

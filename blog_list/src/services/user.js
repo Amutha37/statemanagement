@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-// let token = null
 import blogService from './blogs'
 const baseUserUrl = '/api/users'
 
@@ -23,7 +22,7 @@ const getUser = async () => {
   }
   return null
 }
-// remove from localstorage
+
 const removeUser = async () => {
   localStorage.clear()
 }

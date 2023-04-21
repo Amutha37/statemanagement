@@ -2,7 +2,6 @@ import React from 'react'
 
 import { useSelector } from 'react-redux'
 import { useMatch } from 'react-router-dom'
-// import  {setNotification } from '../reducers/notificationReducer'
 
 const UserBlogs = () => {
   const users = useSelector((state) => state.users)
