@@ -44,8 +44,8 @@ blogsRouter.post('/', async (request, response) => {
 blogsRouter.put('/:id', async (request, response, next) => {
   const user = request.user
 
-  //   const { body } = request
-  //   const user = body.user
+  // const { body } = request
+  // const user = body.user
   try {
     const blog = await Blog.findById(request.params.id)
 
@@ -61,6 +61,23 @@ blogsRouter.put('/:id', async (request, response, next) => {
   } catch (error) {
     next(error)
   }
+})
+// add comments database
+
+blogsRouter.post('/:id/comments', async (request, response) => {
+  const blog = await Blog.findById(request.params.id).populate('user', {
+    username: 1,
+    name: 1,
+  })
+
+  const { comment } = request.body
+  blog.comments = blog.comments.concat(comment)
+
+  const updatedCommentedBlog = await blog.save()
+
+  updatedCommentedBlog
+    ? response.status(200).json(updatedCommentedBlog.toJSON())
+    : response.status(404).end()
 })
 // deleting database
 blogsRouter.delete('/:id', async (request, response, next) => {
